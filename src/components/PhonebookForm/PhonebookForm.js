@@ -69,7 +69,7 @@ class PhonebookForm extends Component {
 }
 
 PhonebookForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+onSubmit: PropTypes.func.isRequired,
 }
 
 export default PhonebookForm;

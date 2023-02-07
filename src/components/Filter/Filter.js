@@ -6,10 +6,10 @@ const Filter = ({onChange, value}) => {
     return(
         <p className={s.Filter}>Find contacts by name
             <input 
-               className={s.FilterInput}
-               type="text"
-               value={value}
-               onChange={onChange}
+            className={s.FilterInput}
+            type="text"
+            value={value}
+            onChange={onChange}
             >
             </input>
         </p>
@@ -17,8 +17,8 @@ const Filter = ({onChange, value}) => {
 }
 
 Filter.propTypes = {
-    onChange: PropTypes.func.isRequired,
-    value: PropTypes.string.isRequired
+onChange: PropTypes.func.isRequired,
+value: PropTypes.string.isRequired
 }
 
 export default Filter;
