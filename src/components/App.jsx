@@ -1,44 +1,44 @@
-import { nanoid } from "nanoid";
-import React, { Component } from "react";
-import PhonebookForm from "../components/PhonebookForm";
-import Filter from "./Filter";
-import Contacts from "./Contacts/Contacts";
-
+import { nanoid } from 'nanoid';
+import React, { Component } from 'react';
+import PhonebookForm from '../components/PhonebookForm';
+import Filter from './Filter';
+import Contacts from './Contacts/Contacts';
 
 export class App extends Component {
   state = {
-    contacts: [ 
-      {id: '1', name: 'Rosie Simpson', number: '+ 459-12-56'},
-      {id: '2', name: 'Hermione Kline', number: '+ 443-89-12'},
-      {id: '3', name: 'Eden Clements', number: '+ 645-17-79'},
-      {id: '4', name: 'Annie Copeland', number: '+ 227-91-26'},
+    contacts: [
+      { id: '1', name: 'Rosie Simpson', number: '+ 459-12-56' },
+      { id: '2', name: 'Hermione Kline', number: '+ 443-89-12' },
+      { id: '3', name: 'Eden Clements', number: '+ 645-17-79' },
+      { id: '4', name: 'Annie Copeland', number: '+ 227-91-26' },
     ],
     filter: '',
-  }
+  };
 
   deleteContact = contactId => {
     this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId)
-    }))
-  }
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
 
   addContact = newContact => {
-    const checkedName = this.state.contacts.find(contact => 
-      contact.name.toLowerCase() === newContact.name.toLowerCase());
-    
-    if (checkedName){
-      alert('This Name already exist!' + newContact.name)
-      return
+    const checkedName = this.state.contacts.find(
+      contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
+    );
+
+    if (checkedName) {
+      alert('This Name already exist!' + newContact.name);
+      return;
     }
 
     this.setState(prevState => ({
-      contacts: [newContact, ...prevState.contacts]
-    }))
-  }
-  
+      contacts: [newContact, ...prevState.contacts],
+    }));
+  };
+
   findDuplicate = newContactName => {
     const isDublicate = this.state.contacts.some(
-      contact => contact.name === newContactName,
+      contact => contact.name === newContactName
     );
 
     if (isDublicate) {
@@ -46,35 +46,31 @@ export class App extends Component {
     }
   };
 
-  changeFilter = (e) => {
-    this.setState({filter: e.currentTarget.value})
-  }
+  changeFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
+  };
 
   getFilterContact = () => {
-    const {contacts, filter} = this.state;
+    const { contacts, filter } = this.state;
     const normalizedFilter = filter.toLowerCase();
-    return contacts.filter(contact => 
-      contact.name.toLowerCase().includes(normalizedFilter))
-  }  
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
 
   render() {
-    const filterContact = this.getFilterContact()
+    const filterContact = this.getFilterContact();
     return (
-      <div style={{ marginLeft: '40px',}}>
+      <div style={{ marginLeft: '40px' }}>
         <h1>Phonebook</h1>
-          <PhonebookForm 
-            onSubmit = {this.addContact}
-          />
+        <PhonebookForm onSubmit={this.addContact} />
         <h1>Contacts</h1>
-          <Filter 
-            value = {this.state.filter} 
-            onChange = {this.changeFilter}
-          />
-          <Contacts 
-            contacts = {filterContact}
-            onDeleteContact = {this.deleteContact}
-          />
+        <Filter value={this.state.filter} onChange={this.changeFilter} />
+        <Contacts
+          contacts={filterContact}
+          onDeleteContact={this.deleteContact}
+        />
       </div>
-    )
-  };
-};
+    );
+  }
+}
